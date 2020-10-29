@@ -16,9 +16,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
 
+
     private float latitud,longitd;
     private String nombre;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,27 +35,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         longitd = bundle.getFloat("longitud");
         nombre = bundle.getString("nombre");
 
-
-
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        // Datos de un punto estatico
+        Double latEstatica = -36.827260651417426;
+        Double lonEstatica = -73.05020143313516;
+        String titutloEstatica = "Plaza Concepción";
+        LatLng plaza = new LatLng(latEstatica,lonEstatica);
+
+
         LatLng lugar = new LatLng(this.latitud,this.longitd);
         mMap.addMarker(new MarkerOptions().position(lugar).title(this.nombre));
+
+        mMap.addMarker(new MarkerOptions().position(plaza).title(titutloEstatica));
+
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lugar,19));
-        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lugar,17));
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
 }
